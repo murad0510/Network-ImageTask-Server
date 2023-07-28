@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="600">
     <Grid>
-        <StackPanel Name="MyStackPanel"></StackPanel>
+        <Button Command="{Binding SendButtonCommand}" Width="210" Height="70" Margin="0,300,0,0" Content="Connection" FontSize="40" Canvas.Top="250" Background="DeepSkyBlue" Foreground="White" Canvas.Left="20">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <StackPanel Margin="0,0,0,130" Height="300" Name="MyStackPanel"></StackPanel>
+
+        <ScrollViewer Height="300" Margin="0,0,0,130">
+        </ScrollViewer>
     </Grid>
 </Window>
