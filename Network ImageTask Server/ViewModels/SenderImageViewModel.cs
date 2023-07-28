@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Network_ImageTask_Server.ViewModels
 {
     public class SenderImageViewModel : BaseViewModel
     {
-        private string image;
+        private BitmapImage image;
 
-        public string Image
+        public BitmapImage Image
         {
             get { return image; }
             set { image = value; OnPropertyChanged(); }
         }
-
     }
 }
