@@ -22,13 +22,10 @@ namespace Network_ImageTask_Server.ViewModels
         {
             SendButtonCommand = new RelayCommand((_) =>
             {
-                SenderImage senderImage = new SenderImage();
-                SenderImageViewModel senderImageViewModel = new SenderImageViewModel();
-                senderImage.DataContext = senderImageViewModel;
                 Task.Run(() =>
                 {
-                    var ipAdress = IPAddress.Parse("10.2.27.3");
-                    var port = 27034;
+                    var ipAdress = IPAddress.Parse("192.168.0.109");
+                    var port = 27001;
 
                     using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
                     {
@@ -42,21 +39,33 @@ namespace Network_ImageTask_Server.ViewModels
                             MessageBox.Show($"{client.RemoteEndPoint}");
 
                             var length = 0;
-                            var bytes = new byte[500000];
+                            var bytes = new byte[900000];
 
-                            do
+                            App.Current.Dispatcher.Invoke((System.Action)delegate
                             {
-                                length = client.Receive(bytes);
-
-                                senderImageViewModel.Image = LoadImage(bytes);
-                                break;
-                            } while (length > 0);
+                                do
+                                {
+                                    length = client.Receive(bytes);
+                                    S(bytes);
+                                    break;
+                                } while (length > 0);
+                            });
                         }
                     }
                 });
-                MessageBox.Show($"{App.MainStackPanel.Children.Count}");
-                App.MainStackPanel.Children.Add(senderImage);
             });
+        }
+
+        public void S(byte[] bytes)
+        {
+            SenderImage senderImage = new SenderImage();
+            SenderImageViewModel senderImageViewModel = new SenderImageViewModel();
+            senderImage.DataContext = senderImageViewModel;
+
+            senderImageViewModel.Image = LoadImage(bytes);
+
+            App.MainStackPanel.Children.Add(senderImage);
+            MessageBox.Show($"{App.MainStackPanel.Children.Count}");
         }
 
         public static BitmapImage LoadImage(byte[] imageData)
