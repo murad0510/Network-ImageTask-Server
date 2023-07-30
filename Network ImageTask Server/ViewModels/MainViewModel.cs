@@ -18,6 +18,7 @@ namespace Network_ImageTask_Server.ViewModels
     public class MainViewModel
     {
         public RelayCommand SendButtonCommand { get; set; }
+
         public MainViewModel()
         {
             SendButtonCommand = new RelayCommand((_) =>
@@ -31,12 +32,13 @@ namespace Network_ImageTask_Server.ViewModels
                     {
                         var ep = new IPEndPoint(ipAdress, port);
                         socket.Bind(ep);
+                        MessageBox.Show("Server is up");
                         socket.Listen(10);
                         while (true)
                         {
                             var client = socket.Accept();
 
-                            MessageBox.Show($"{client.RemoteEndPoint}");
+                            MessageBox.Show($"Client connected : {client.RemoteEndPoint}");
 
                             var length = 0;
                             var bytes = new byte[900000];
@@ -46,7 +48,7 @@ namespace Network_ImageTask_Server.ViewModels
                                 do
                                 {
                                     length = client.Receive(bytes);
-                                    S(bytes);
+                                    WrapPanelAdd(bytes);
                                     break;
                                 } while (length > 0);
                             });
@@ -56,7 +58,7 @@ namespace Network_ImageTask_Server.ViewModels
             });
         }
 
-        public void S(byte[] bytes)
+        public void WrapPanelAdd(byte[] bytes)
         {
             SenderImage senderImage = new SenderImage();
             SenderImageViewModel senderImageViewModel = new SenderImageViewModel();
@@ -64,8 +66,8 @@ namespace Network_ImageTask_Server.ViewModels
 
             senderImageViewModel.Image = LoadImage(bytes);
 
-            App.MainStackPanel.Children.Add(senderImage);
-            MessageBox.Show($"{App.MainStackPanel.Children.Count}");
+            App.MainMyPanel.Children.Add(senderImage);
+            //MessageBox.Show($"{App.MainMyPanel.Children.Count}");
         }
 
         public static BitmapImage LoadImage(byte[] imageData)

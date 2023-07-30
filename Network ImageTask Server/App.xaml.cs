@@ -14,6 +14,6 @@ namespace Network_ImageTask_Server
     /// </summary>
     public partial class App : Application
     {
-        public static StackPanel MainStackPanel { get; set; }
+        public static WrapPanel MainMyPanel { get; set; }
     }
 }

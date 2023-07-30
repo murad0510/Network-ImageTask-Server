@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Network_ImageTask_Server.Views.UserControls"
              mc:Ignorable="d" 
-             Height="250" Width="500" Background="White">
+             Height="250" Width="500" Background="Black" Margin="20">
     <Grid>
-        <Image Source="{Binding Image}"></Image>
+        <Image Source="{Binding Image}" Margin="10"></Image>
     </Grid>
 </UserControl>

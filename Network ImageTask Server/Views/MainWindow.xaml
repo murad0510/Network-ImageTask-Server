@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="600">
     <Grid>
-        <Button Command="{Binding SendButtonCommand}" Width="210" Height="70" Margin="195,334,195,30" Content="Connection" FontSize="40" Canvas.Top="250" Background="DeepSkyBlue" Foreground="White" Canvas.Left="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="330"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="1" Command="{Binding SendButtonCommand}" Width="210" Height="70"  Content="Connection" FontSize="40" Canvas.Top="250" Background="DeepSkyBlue" Foreground="White" Canvas.Left="20">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"/>
@@ -17,9 +21,9 @@
 
 
         <ScrollViewer>
-            <StackPanel Margin="0,0,0,130" Background="Transparent" Height="300" Name="MyStackPanel">
-
-            </StackPanel>
+            <!--<StackPanel Margin="0,0,0,130" Background="Transparent" Height="300" Name="MyStackPanel">
+            </StackPanel>-->
+            <WrapPanel Name="MyPanel" Orientation="Horizontal"></WrapPanel>
         </ScrollViewer>
 
     </Grid>

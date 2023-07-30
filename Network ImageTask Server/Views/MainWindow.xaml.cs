@@ -24,7 +24,7 @@ namespace Network_ImageTask_Server
         public MainWindow()
         {
             InitializeComponent();
-            App.MainStackPanel = MyStackPanel;
+            App.MainMyPanel = MyPanel;
             MainViewModel mainViewModel = new MainViewModel();
             this.DataContext = mainViewModel;
         }
